@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 //clase cadena
 //tiene que tener caracter i longitud
 //mai surt de rang
@@ -9,30 +10,35 @@ class Cadena
 {
 private:
 	int longitud;
-	char* caracter;
+	char* car;
 public:
 	Cadena(){ longitud = 1; 
-	caracter = new char[longitud]; 
-	caracter[0] = '\0'; };
+	car = new char[longitud]; 
+	car[0] = '0'; };
 	Cadena(const char* c ){ 
 		longitud = strlen(c) + 1;
-		caracter = new char[longitud];
-		strcpy(caracter,longitud,c);
+		car = new char[longitud];
+		strcpy_s(car,longitud,c);
 
 	};
-	Cadena(const longitud&){  };
+	Cadena(const Cadena& cadena ){ 
+		longitud = cadena.longitud;
+		car = new char[longitud];
+	};
 	~Cadena();
 	int len()const{	
-		return string 
+		return strlen(car);
 	}
+	bool operator ==(const char* _string){
+		if (_string != NULL)
+			return strcmp(car, _string);
+	}
+
+	bool operator ==(const Cadena& cadena){
+		return strcmp(car, cadena.string);
+	}
+
 
 
 };
 
-Cadena::Cadena()
-{
-}
-
-Cadena::~Cadena()
-{
-}
