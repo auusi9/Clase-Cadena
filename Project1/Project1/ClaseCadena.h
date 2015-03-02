@@ -15,23 +15,25 @@ private:
 	int longitud;
 	char* car;
 public:
-	Cadena(){ longitud = 1; 
-	car = new char[longitud]; 
-	car[0] = '\0'; }
 
-	Cadena(const char* c ){ 
+	Cadena(){
+		longitud = 1;
+		car = new char[longitud];
+		car[0] = '\0';
+	}
+
+	Cadena(const char* c){
 		longitud = strlen(c) + 1;
 		car = new char[longitud];
-		strcpy_s(car,longitud,c);
-
+		strcpy_s(car, longitud, c);
 	}
-	Cadena(const Cadena& cadena ){ 
+
+	Cadena(const Cadena& cadena){
 		longitud = cadena.longitud;
 		car = new char[longitud];
 	}
 
-	Cadena(const char *format, ...)
-	{
+	Cadena(const char *format, ...){
 		longitud = 0;
 		if (format != NULL)
 		{
@@ -48,8 +50,8 @@ public:
 				strcpy_s(car, longitud, tmp);
 			}
 		}
-		
 	}
+
 	~Cadena(){ delete[]car; }
 
 	bool operator ==(const char* _string){
@@ -58,6 +60,7 @@ public:
 		}
 		return false;
 	}
+
 	bool operator !=(const char* _string){
 
 		if (_string != NULL){
@@ -68,21 +71,20 @@ public:
 	}
 
 	bool operator ==(const Cadena& cadena){
-		
+
 		return strcmp(car, cadena.car) == 0;
 	}
 
 	bool operator !=(const Cadena& cadena){
 
 		return strcmp(car, cadena.car) != 0;
-
 	}
 
 	const Cadena& operator =(const char* _string)
 	{
 		if (_string != NULL){
 
-			if (strlen(_string + 1 )> longitud)
+			if (strlen(_string + 1)> longitud)
 			{
 				delete[] car;
 				Alloc(strlen(_string) + 1);
@@ -108,7 +110,6 @@ public:
 			Clear();
 			strcpy_s(car, longitud, cadena.car);
 		}
-
 	}
 
 	const Cadena& operator +=(const char* _string)
@@ -118,54 +119,73 @@ public:
 			if (longitud <= (strlen(_string) + strlen(car))){
 
 				char* aux_string;
-				strcpy_s(aux_string,longitud,  car);
+				strcpy_s(aux_string, longitud, car);
 				Alloc(strlen(_string) + strlen(car) + 1);
 				car = new char[strlen(_string) + strlen(car) + 1];
 				strcpy_s(car, longitud, aux_string);
 				strcat_s(car, longitud, _string);
 				delete[] car;
-				
-
 
 			}
+			else{
+				strcat(car, _string);
+			}return(*this);
+		}
+		else{
+			return(*this);
 		}
 
 
-		return(*this);
+
 	}
 
 	const Cadena& operator +=(const Cadena &cadena)
 	{
-		
+		if (longitud <= (strlen(cadena.car) + strlen(car))){
+
+			char* aux_string;
+			strcpy_s(aux_string, longitud, car);
+			Alloc(strlen(cadena.car) + strlen(car) + 1);
+			car = new char[strlen(cadena.car) + strlen(car) + 1];
+			strcpy_s(car, longitud, aux_string);
+			strcat_s(car, longitud, cadena.car);
+			delete[] car;
+
+
+
+		}
+		else{
+			strcat(car, _string);
+		}
 
 		return(*this);
 	}
 
-		int Length(){
+	int Length(){
 
-			return strlen(car);
-		}
-		char* getString(){
+		return strlen(car);
+	}
 
-			return car;
-		}
+	char* getString(){
 
-		int Capacity(){
-		
-			return longitud;
-		}
+		return car;
+	}
 
-		void Clear(){
-			delete[] car;
-			int longitud = 1;
-			car = new char[longitud];
- 
-		}
-		void Alloc(const int i){
-			delete[] car;
-			car = new char[i];
+	int Capacity(){
 
-		}
+		return longitud;
+	}
 
-	
+	void Clear(){
+		delete[] car;
+		int longitud = 1;
+		car = new char[longitud];
+	}
+
+	void Alloc(const int i){
+		delete[] car;
+		car = new char[i];
+	}
+
+
 };
