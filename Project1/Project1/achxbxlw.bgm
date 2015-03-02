@@ -2,13 +2,11 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
-#include <stdarg.h>
-#include <wtypes.h>
 //clase cadena
 //tiene que tener caracter i longitud
 //mai surt de rang
 //constructors string();ng(const char*); String(const String&); 
-
+#define TMP_STRING_SIZE 4091
 class Cadena
 {
 private:
@@ -35,20 +33,23 @@ public:
 		longitud = 0;
 		if (format != NULL)
 		{
-			static char tmp[4096];
+			static char tmp[TMP_STRING_SIZE];
 			static va_list ap;
 			// Construct the string from variable arguments
 			va_start(ap, format);
-			int res = vsprintf_s(tmp, 4096, format, ap);
+			int res = vsprintf_s(tmp, TMP_STRING_SIZE, format, ap);
 			va_end(ap);
 			if (res > 0)
 			{
-				longitud = res + 1;
-				car = new char[longitud];
+				Alloc(res + 1);
 				strcpy_s(car, longitud, tmp);
 			}
 		}
-		
+		if (longitud == 0)
+		{
+			Alloc(1);
+			Clear();
+		}
 	}
 	~Cadena(){ delete[]car; }
 
@@ -80,55 +81,39 @@ public:
 
 	const Cadena& operator =(const char* _string)
 	{
-		if (_string != NULL){
-
-			if (strlen(_string + 1 )> longitud)
+		if (_string != NULL)
+		{
+			if (strlen(_string) + 1 > longitud)
 			{
 				delete[] car;
 				Alloc(strlen(_string) + 1);
 			}
-			else{
+			else
 				Clear();
-				strcpy_s(car, longitud, _string);
-			}
+			strcpy_s(car, longitud, _string);
 		}
-		else{
+		else
+		{
 			Clear();
 		}
-		return (*this);
+		return(*this);
 	}
 
 	const Cadena& operator =(const Cadena &cadena)
 	{
-		if (strlen(cadena.car) + 1 > longitud){
+		if (cadena.Length() + 1 > longitud)
+		{
 			delete[] car;
-			Alloc(strlen(cadena.car) + 1);
+			Alloc(cadena.Length() + 1);
 		}
-		else{
+		else
 			Clear();
-			strcpy_s(car, longitud, cadena.car);
-		}
-
+		strcpy_s(car, longitud, cadena.car);
+		return(*this);
 	}
 
 	const Cadena& operator +=(const char* _string)
 	{
-		if (_string != NULL){
-
-			if (longitud <= (strlen(_string) + strlen(car))){
-
-				char* aux_string;
-				strcpy_s(aux_string,longitud,  car);
-				Alloc(strlen(_string) + strlen(car) + 1);
-				car = new char[strlen(_string) + strlen(car) + 1];
-				strcpy_s(car, longitud, aux_string);
-				strcat_s(car, longitud, _string);
-				delete[] car;
-				
-
-
-			}
-		}
 
 
 		return(*this);
@@ -136,7 +121,7 @@ public:
 
 	const Cadena& operator +=(const Cadena &cadena)
 	{
-		
+
 
 		return(*this);
 	}
@@ -161,11 +146,7 @@ public:
 			car = new char[longitud];
  
 		}
-		void Alloc(const int i){
-			delete[] car;
-			car = new char[i];
 
-		}
 
 	
 };
