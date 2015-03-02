@@ -59,7 +59,7 @@ public:
 	float Distanceto(Punt2d r){
 
 
-		return sqrtf(pow(p - r.p) - pow(q - r.q));
+		return sqrtf((p - r.p)*(p - r.p) + (q - r.q)*(q - r.q));
 
 	}
 };

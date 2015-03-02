@@ -15,6 +15,7 @@ public:
 	Cadena(){ longitud = 1; 
 	car = new char[longitud]; 
 	car[0] = '0'; };
+
 	Cadena(const char* c ){ 
 		longitud = strlen(c) + 1;
 		car = new char[longitud];
@@ -30,15 +31,38 @@ public:
 		return strlen(car);
 	}
 	bool operator ==(const char* _string){
-		if (_string != NULL)
-			return strcmp(car, _string);
+		if (_string != NULL){
+			return strcmp(car, _string) == 0;
+		}
+		return true;
+	}
+	bool operator !=(const char* _string){
+
+		if (_string != NULL){
+
+			return strcmp(car, _string) != 0;
+		}
+		return true;
 	}
 
 	bool operator ==(const Cadena& cadena){
-		return strcmp(car, cadena.string);
+		if (strcmp(car, cadena.car) == 0){ return true; }
+		return false ;
 	}
 
+	bool operator !=(const Cadena& cadena){
 
+		if (strcmp(car, cadena.car) != 0){ return true; }
+		return false;
+
+	}
+
+	const Cadena& operator =(const Cadena &cadena)
+	{
+		
+
+		return(*this);
+	}
 
 };
 
