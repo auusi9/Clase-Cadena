@@ -4,3 +4,10 @@
 #include <string.h>
 #include <stdarg.h>
 #include <wtypes.h>
+
+int main(){
+
+
+
+	return 0;
+}

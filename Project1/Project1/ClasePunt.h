@@ -6,9 +6,9 @@
 #include <math.h>
 class Punt2d
 {
-private:
-	float p, q;
 public:
+	float p, q;
+
 	Punt2d(){ p = 0.0; q = 0.0; };
 	Punt2d(const float _p, const float _q){ p = _p; q = _q; };
 
@@ -57,7 +57,7 @@ public:
 		p = 0.0; q = 0.0;
 
 	}
-	float Distanceto(Punt2d r){
+	float DistanceTo(Punt2d r){
 
 
 		return sqrtf((p - r.p)*(p - r.p) + (q - r.q)*(q - r.q));

@@ -156,7 +156,7 @@ public:
 
 		}
 		else{
-			strcat(car, cadena.car);
+			strcat(car, _string);
 		}
 
 		return(*this);
