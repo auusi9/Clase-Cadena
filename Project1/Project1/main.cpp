@@ -1,12 +1,15 @@
-#include <windows.h>
+#include "ClaseCadena.h"
+#include "ClasePunt.h"
 #include <stdio.h>
-#include <assert.h>
-#include <string.h>
-#include <stdarg.h>
-#include <wtypes.h>
 
 int main(){
 
+	Cadena cadena;
+	Punt2d P;
+	
+
+	getchar();
+	return 0;
 
 
 	return 0;

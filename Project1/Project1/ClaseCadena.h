@@ -1,21 +1,17 @@
-
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
 #include <stdarg.h>
 #include <wtypes.h>
-//clase cadena
-//tiene que tener caracter i longitud
-//mai surt de rang
-//constructors string();ng(const char*); String(const String&); 
+
 
 class Cadena
 {
-private:
+public:
 	int longitud;
 	char* car;
-public:
+
 
 	Cadena(){
 		longitud = 1;
@@ -129,7 +125,7 @@ public:
 
 			}
 			else{
-				strcat(car, _string);
+				strcat_s(car, longitud,_string);
 			}return(*this);
 		}
 		else{
@@ -156,7 +152,7 @@ public:
 
 		}
 		else{
-			strcat(car, cadena.car);
+			strcat_s(car,longitud, cadena.car);
 		}
 
 		return(*this);

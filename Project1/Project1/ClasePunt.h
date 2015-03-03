@@ -1,8 +1,4 @@
-
-#include <windows.h>
 #include <stdio.h>
-#include <assert.h>
-#include <string.h>
 #include <math.h>
 class Punt2d
 {
@@ -53,8 +49,8 @@ public:
 
 	~Punt2d();
 
-	int SetZero(){
-		p = 0.0; q = 0.0;
+	void SetZero(){
+		 p = 0.0; q = 0.0;
 
 	}
 	float DistanceTo(Punt2d r){

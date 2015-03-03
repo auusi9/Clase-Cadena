@@ -64,7 +64,18 @@ namespace UnitTest1
 		}
 		TEST_METHOD(TestMethod6) //operator +=
 		{
+			Punt2d target1;
+			Punt2d target2;
 
+			target1.p = 3;
+			target1.q = 1;
+
+			target2.p = 2;
+			target2.q = 3;
+
+			target1 += target2;
+
+			Assert::IsTrue(target1.p == 5 && target1.q == 4);
 
 		}
 		TEST_METHOD(TestMethod7) //operator -
@@ -84,7 +95,18 @@ namespace UnitTest1
 		}
 		TEST_METHOD(TestMethod8) //operator -=
 		{
+			Punt2d target1;
+			Punt2d target2;
 
+			target1.p = 3;
+			target1.q = 4;
+
+			target2.p = 2;
+			target2.q = 2;
+
+			target1 -= target2;
+
+			Assert::IsTrue(target1.p == 1 && target1.q == 2);
 
 		}
 		TEST_METHOD(TestMethod9) //operator ==
@@ -113,8 +135,10 @@ namespace UnitTest1
 		//--STRING UNIT TEST---------------------------------------------------
 		TEST_METHOD(TestMethod11) //empty constructor
 		{
-			Cadena str;
-			Assert::IsTrue(str == "");
+			Cadena* target = new Cadena();
+
+			Assert::IsTrue(target->longitud == 1);
+			Assert::AreEqual(target->car, "");
 		}
 		TEST_METHOD(TestMethod12) //char* constructor
 		{
@@ -123,68 +147,82 @@ namespace UnitTest1
 		}
 		TEST_METHOD(TestMethod13) //constructor ( _string, ...)
 		{
-			Cadena str("%s", "monster");
-			Assert::IsTrue(str == "monster");
+			Cadena target("%s", "hola");
+			Assert::IsTrue(target == "hola");
 		}
 		TEST_METHOD(TestMethod14) //operator == (with reference)
 		{
-			Cadena str1("%s", "monster");
-			Cadena& rstr1 = str1;
-			Cadena str2("%s", "monster");
-			Assert::IsTrue(rstr1.operator == (str2));
+			Cadena target1("%s", "hola");
+			Cadena& rtarget1 = target1;
+			Cadena target2("%s", "hola");
+			Assert::IsTrue(rtarget1.operator == (target2));
 		}
 		TEST_METHOD(TestMethod15) //operator == (with char*)
 		{
-			Cadena str1("%s", "monster");
-			Cadena str2("%s", "monster");
-			Assert::IsTrue(str1.operator == (str2));
+			Cadena target1("%s", "hola");
+			Cadena target2("%s", "hola");
+			Assert::IsTrue(target1.operator == (target2));
 		}
 		TEST_METHOD(TestMethod16) //operator = (with reference)
 		{
-			Cadena str1("%s", "monster");
-			Cadena& rstr1 = str1;
-			Cadena str2("%s", "monster hunter");
-			Assert::IsTrue(str2.operator = (rstr1) == "monster hunter");
+			Cadena target1("%s", "hola");
+			Cadena target2("%s", "hola mon");
+
+			
 		}
 		TEST_METHOD(TestMethod17) //operator = (with char*)
 		{
-			Cadena str1("%s", "monster");
-			Cadena str2("%s", "monster hunter");
-			Assert::IsTrue(str2.operator = (str1) == "monster hunter");
+			Cadena target1("%s", "hola");
+			Cadena target2("%s", "hola mon");
+			
+
 		}
 		TEST_METHOD(TestMethod18) //operator != (with reference)
 		{
+			Cadena target1("%s", "hola");
+			Cadena target2("%s", "mon");
 
+			Assert::IsTrue(target1 != target2);
 
 		}
 		TEST_METHOD(TestMethod19) //operator != (with char*)
 		{
+			Cadena target1;
+
+			Assert::IsFalse(target1 != NULL);
+
+
+			Cadena target2("%s", "hola");
+
+			Assert::IsTrue(target2 != "mon");
 
 
 		}
 		TEST_METHOD(TestMethod20) //Clear unit test
 		{
-			Cadena str("%s", "monster");
-			str.Clear();
-			Assert::IsTrue(str == "");
+			Cadena target("%s", "hola");
+
+			target.Clear();
+
+			Assert::AreEqual(target.car, "");
 		}
-		/*
-		TEST_METHOD(TestMethod21) //Alloc unit test
-		{
-		Cadena str;
-		str.Alloc(5);
-		Assert::IsTrue((strlen(str) + 1) == 6);
-		}
-		*/
+		
 		TEST_METHOD(TestMethod22) //Length
 		{
+			Cadena target("%s", "hola");
+
+			Assert::IsTrue(target.Length() == 4);
 
 
 		}
-		TEST_METHOD(TestMethod23) //GetString
+		TEST_METHOD(TestMethod23) //getString
 		{
+			Cadena target("%s", "hola");
 
+			Assert::AreEqual(target.getString(), "hola");
 
 		}
+
+
 	};
 }
